@@ -4,11 +4,10 @@ using System.Text;
 
 namespace CoxP5
 {
-    abstract class Sprocket
+    public abstract class Sprocket
     {
-        private decimal _price { get; set; }
         private int _itemId { get; set; }
-        public decimal Price { get { return _price; } }
+        public decimal Price { get; set; }
         public int ItemID { get { return _itemId; } }
         public int NumTeeth { get; set; }
         public int NumItems { get; set; }
@@ -19,12 +18,16 @@ namespace CoxP5
         }
         public Sprocket(int itemID, int numItems, int numTeeth)
         {
+            _itemId = itemID;
+            NumItems = numItems;
+            NumTeeth = numTeeth;
 
         }
         public override string ToString()
         {
             return $"ItemID: {ItemID} Num Items: {NumItems} Num Teeth: {NumTeeth} Total Price: {Price}";
         }
+
 
     }
 }

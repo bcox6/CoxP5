@@ -6,9 +6,17 @@ namespace CoxP5
 {
     class SteelSprocket : Sprocket
     {
+        public SteelSprocket() : base()
+        {
+
+        }
+        public SteelSprocket(int itemID, int numItems, int numTeeth) : base(itemID, numItems, numTeeth)
+        {
+            Calculate();
+        }
         protected override void Calculate()
         {
-            throw new NotImplementedException();
+            Price = 0.05M * NumTeeth * NumItems;
         }
 
         public override string ToString()

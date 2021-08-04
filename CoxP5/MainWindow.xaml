@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoxP5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="533" Width="418">
+    <Grid Margin="0,0,0,177">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="59*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblTitle" Content="Sprocket Order Manager" HorizontalAlignment="Left" Margin="82,25,0,0" VerticalAlignment="Top" Width="254" Height="39" FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2"/>
+        <Label x:Name="label" Content="Customer Name" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Height="26" Width="96"/>
+        <Label x:Name="lblStreet" Content="Street" HorizontalAlignment="Left" Margin="11,137,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCity" Content="City" HorizontalAlignment="Left" Margin="11,168,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblState" Content="State" HorizontalAlignment="Left" Margin="11,199,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblZipCode" Content="Zip Code" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,257,0,0" VerticalAlignment="Top" Grid.Column="1" Click="btnAdd_Click"/>
+        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Grid.Column="1" Click="btnRemove_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="237,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.228,0.537" Grid.Column="1" Click="btnUpdate_Click"/>
+        <TextBox x:Name="txtStreet" Grid.Column="1" HorizontalAlignment="Center" Margin="0,141,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
+        <TextBox x:Name="txtName" Grid.Column="1" HorizontalAlignment="Center" Margin="0,92,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
+        <CheckBox x:Name="checkBox" Content="Local Pickup" Grid.Column="1" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCity" Grid.Column="1" HorizontalAlignment="Center" Margin="0,172,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
+        <TextBox x:Name="txtState" Grid.Column="1" HorizontalAlignment="Center" Margin="0,203,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
+        <TextBox x:Name="txtZipCode" Grid.Column="1" HorizontalAlignment="Center" Margin="0,234,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
+        <ListBox x:Name="lbResults" Grid.ColumnSpan="2" Margin="10,286,10,-167" SelectionChanged="lbResults_SelectionChanged"/>
 
     </Grid>
 </Window>
