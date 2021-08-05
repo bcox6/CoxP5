@@ -60,7 +60,7 @@ namespace CoxP5
             {
                 using (StreamWriter file = new StreamWriter(saveFile.OpenFile()))
                 {
-                    file.WriteLine($"{txtName.Text}: {sprockets.Count} items, Total Price: ${totalPrice.ToString("N0")}");
+                    file.WriteLine($"{txtName.Text}: {sprockets.Count} items, Total Price: ${totalPrice.ToString("N")}");
                     if (!chkbxLocalPickup.IsChecked.Value)
                     {
                         file.WriteLine($"Ship to:");
