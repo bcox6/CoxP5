@@ -12,14 +12,14 @@
         <Label x:Name="lblNumOfTeeth" Content="Number of Teeth" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblNumofItems" Content="Number of Items" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblTitle" Content="Sprocket Form" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <TextBox x:Name="txtItemId" HorizontalAlignment="Left" Margin="124,62,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <TextBox x:Name="txtItemId" HorizontalAlignment="Left" Margin="124,62,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" PreviewTextInput="txtItemId_PreviewTextInput" />
         <ComboBox x:Name="cmbxItemType" HorizontalAlignment="Left" Margin="124,94,0,0" VerticalAlignment="Top" Width="216" SelectedIndex="0">
             <ComboBoxItem Content="Aluminum"/>
             <ComboBoxItem Content="Steel"/>
             <ComboBoxItem Content="Plastic"/>
         </ComboBox>
-        <TextBox x:Name="txtNumOfTeeth" HorizontalAlignment="Left" Margin="124,124,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
-        <TextBox x:Name="txtNumOfItems" HorizontalAlignment="Left" Margin="124,155,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <TextBox x:Name="txtNumOfTeeth" HorizontalAlignment="Left" Margin="124,124,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" PreviewTextInput="txtNumOfTeeth_PreviewTextInput"/>
+        <TextBox x:Name="txtNumOfItems" HorizontalAlignment="Left" Margin="124,155,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" PreviewTextInput="txtNumOfItems_PreviewTextInput" />
         <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="124,181,0,0" VerticalAlignment="Top" Click="btnSubmit_Click" IsDefault="True"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="279,181,0,0" VerticalAlignment="Top" IsCancel="True" Click="btnCancel_Click"/>
     </Grid>

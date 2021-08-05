@@ -52,12 +52,40 @@ namespace CoxP5
                 int numItems = int.Parse(txtNumOfItems.Text);
                 Sprocket = new PlasticSprocket(itemId, numTeeth, numItems);
             }
+            this.DialogResult = true;
             this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void OnlyDigits(object sender, TextCompositionEventArgs e, TextBox textBox)
+        {
+            char ch = e.Text[0];
+            if ((Char.IsDigit(ch) || ch == '.'))
+            {
+                if (ch == '.' && textBox.Text.Contains('.'))
+                    e.Handled = true;
+            }
+            else
+                e.Handled = true;
+        }
+
+        private void txtItemId_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            OnlyDigits(sender, e, txtItemId);
+        }
+
+        private void txtNumOfTeeth_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            OnlyDigits(sender, e, txtNumOfTeeth);
+        }
+
+        private void txtNumOfItems_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            OnlyDigits(sender, e, txtNumOfItems);
         }
     }
 }

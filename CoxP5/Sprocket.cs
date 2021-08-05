@@ -25,7 +25,7 @@ namespace CoxP5
         }
         public override string ToString()
         {
-            return $"ItemID: {ItemID} Num Items: {NumItems} Num Teeth: {NumTeeth} Total Price: {Price}";
+            return $"ItemID: {ItemID} Num Items: {NumItems} Num Teeth: {NumTeeth} Total Price: ${Price.ToString("N0")}";
         }
 
 

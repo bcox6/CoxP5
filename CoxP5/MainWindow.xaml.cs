@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,30 +33,77 @@ namespace CoxP5
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             SprocketForm sprocketForm = new SprocketForm();
-            sprocketForm.ShowDialog();
-            if(sprocketForm.Sprocket != null)
+            if(sprocketForm.ShowDialog() == true)
                 sprockets.Add(sprocketForm.Sprocket);
             lbResults.Items.Refresh();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            sprockets.RemoveAt(index);
+            MessageBoxResult dialogResult = MessageBox.Show("Confirm", "Are you sure your want to delete?", MessageBoxButton.YesNo);
+            if(dialogResult == MessageBoxResult.Yes && sprockets.Count > 0)
+                sprockets.RemoveAt(index);
             lbResults.Items.Refresh();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            if(fileDialog.ShowDialog() == true)
+            decimal totalPrice = 0.00M;
+            foreach (var sprocket in sprockets)
             {
-
+                totalPrice += sprocket.Price;
+            }
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFile.RestoreDirectory = true;
+            if (saveFile.ShowDialog() == true)
+            {
+                using (StreamWriter file = new StreamWriter(saveFile.OpenFile()))
+                {
+                    file.WriteLine($"{txtName.Text}: {sprockets.Count} items, Total Price: ${totalPrice.ToString("N0")}");
+                    if (!chkbxLocalPickup.IsChecked.Value)
+                    {
+                        file.WriteLine($"Ship to:");
+                        file.WriteLine(txtStreet.Text);
+                        file.WriteLine($"{txtCity.Text}, {txtState.Text} {txtZipCode.Text}");
+                    }
+                    file.WriteLine();
+                    foreach (var sprocket in sprockets)
+                    {
+                        file.WriteLine(sprocket.ToString());
+                        file.WriteLine();
+                    }
+                }
             }
         }
 
         private void lbResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             index = lbResults.SelectedIndex;
+        }
+
+        private void chkbxLocalPickup_Checked(object sender, RoutedEventArgs e)
+        {
+            lblCity.Visibility = Visibility.Hidden;
+            lblState.Visibility = Visibility.Hidden;
+            lblStreet.Visibility = Visibility.Hidden;
+            lblZipCode.Visibility = Visibility.Hidden;
+            txtCity.Visibility = Visibility.Hidden;
+            txtState.Visibility = Visibility.Hidden;
+            txtStreet.Visibility = Visibility.Hidden;
+            txtZipCode.Visibility = Visibility.Hidden;
+        }
+
+        private void chkbxLocalPickup_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lblCity.Visibility = Visibility.Visible;
+            lblState.Visibility = Visibility.Visible;
+            lblStreet.Visibility = Visibility.Visible;
+            lblZipCode.Visibility = Visibility.Visible;
+            txtCity.Visibility = Visibility.Visible;
+            txtState.Visibility = Visibility.Visible;
+            txtStreet.Visibility = Visibility.Visible;
+            txtZipCode.Visibility = Visibility.Visible;
         }
     }
 }

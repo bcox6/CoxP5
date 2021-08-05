@@ -21,7 +21,7 @@ namespace CoxP5
 
         public override string ToString()
         {
-            return $"Material: Plastic {base.ToString()}";
+            return $"{base.ToString()} Material: Plastic.";
         }
     }
 }
