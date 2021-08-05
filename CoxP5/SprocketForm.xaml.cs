@@ -31,26 +31,42 @@ namespace CoxP5
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbxItemType.Text.Equals("Aluminum", StringComparison.OrdinalIgnoreCase))
+            if (txtItemId.Text.Equals("") || txtNumOfItems.Text.Equals("") || txtNumOfTeeth.Text.Equals(""))
             {
-                int itemId = int.Parse(txtItemId.Text);
-                int numTeeth = int.Parse(txtNumOfTeeth.Text);
-                int numItems = int.Parse(txtNumOfItems.Text);
-                Sprocket = new AluminumSprocket(itemId, numTeeth, numItems);
+                MessageBox.Show("Please enter all information!");
+                return;
             }
-            else if (cmbxItemType.Text.Equals("Steel", StringComparison.OrdinalIgnoreCase))
+            try
             {
-                int itemId = int.Parse(txtItemId.Text);
-                int numTeeth = int.Parse(txtNumOfTeeth.Text);
-                int numItems = int.Parse(txtNumOfItems.Text);
-                Sprocket = new SteelSprocket(itemId, numTeeth, numItems);
+                if (cmbxItemType.Text.Equals("Aluminum", StringComparison.OrdinalIgnoreCase))
+                {
+                    int itemId = int.Parse(txtItemId.Text);
+                    int numTeeth = int.Parse(txtNumOfTeeth.Text);
+                    int numItems = int.Parse(txtNumOfItems.Text);
+                    Sprocket = new AluminumSprocket(itemId, numTeeth, numItems);
+                }
+                else if (cmbxItemType.Text.Equals("Steel", StringComparison.OrdinalIgnoreCase))
+                {
+                    int itemId = int.Parse(txtItemId.Text);
+                    int numTeeth = int.Parse(txtNumOfTeeth.Text);
+                    int numItems = int.Parse(txtNumOfItems.Text);
+                    Sprocket = new SteelSprocket(itemId, numTeeth, numItems);
+                }
+                else if (cmbxItemType.Text.Equals("Plastic", StringComparison.OrdinalIgnoreCase))
+                {
+                    int itemId = int.Parse(txtItemId.Text);
+                    int numTeeth = int.Parse(txtNumOfTeeth.Text);
+                    int numItems = int.Parse(txtNumOfItems.Text);
+                    Sprocket = new PlasticSprocket(itemId, numTeeth, numItems);
+                }
             }
-            else if (cmbxItemType.Text.Equals("Plastic", StringComparison.OrdinalIgnoreCase))
+            catch(FormatException ex)
             {
-                int itemId = int.Parse(txtItemId.Text);
-                int numTeeth = int.Parse(txtNumOfTeeth.Text);
-                int numItems = int.Parse(txtNumOfItems.Text);
-                Sprocket = new PlasticSprocket(itemId, numTeeth, numItems);
+                MessageBox.Show("I dont know how you did it. But please make sure to only have numbers");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error in software: {ex}");
             }
             this.DialogResult = true;
             this.Close();

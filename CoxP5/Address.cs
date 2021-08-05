@@ -13,7 +13,11 @@ namespace CoxP5
 
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"Ship to:\n");
+            stringBuilder.Append(Street);
+            stringBuilder.Append($"{City}, {State} {ZipCode}");
+            return stringBuilder.ToString();
         }
     }
 }

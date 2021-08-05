@@ -24,6 +24,7 @@ namespace CoxP5
     {
         private List<Sprocket> sprockets = new List<Sprocket>();
         private int index;
+        private Address address = new Address();
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace CoxP5
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            UpdateAddress();
             SprocketForm sprocketForm = new SprocketForm();
             if(sprocketForm.ShowDialog() == true)
                 sprockets.Add(sprocketForm.Sprocket);
@@ -40,6 +42,7 @@ namespace CoxP5
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            UpdateAddress();
             MessageBoxResult dialogResult = MessageBox.Show("Confirm", "Are you sure your want to delete?", MessageBoxButton.YesNo);
             if(dialogResult == MessageBoxResult.Yes && sprockets.Count > 0)
                 sprockets.RemoveAt(index);
@@ -48,6 +51,16 @@ namespace CoxP5
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            UpdateAddress();
+            if(!chkbxLocalPickup.IsChecked.Value && 
+                (address.City.Equals("")||
+                address.State.Equals("")||
+                address.Street.Equals("")||
+                address.ZipCode.Equals("")))
+            {
+                MessageBox.Show("Please make sure the address is filled out correctly.");
+                return;
+            }
             decimal totalPrice = 0.00M;
             foreach (var sprocket in sprockets)
             {
@@ -58,21 +71,26 @@ namespace CoxP5
             saveFile.RestoreDirectory = true;
             if (saveFile.ShowDialog() == true)
             {
-                using (StreamWriter file = new StreamWriter(saveFile.OpenFile()))
+                try
                 {
-                    file.WriteLine($"{txtName.Text}: {sprockets.Count} items, Total Price: ${totalPrice.ToString("N")}");
-                    if (!chkbxLocalPickup.IsChecked.Value)
+                    using (StreamWriter file = new StreamWriter(saveFile.OpenFile()))
                     {
-                        file.WriteLine($"Ship to:");
-                        file.WriteLine(txtStreet.Text);
-                        file.WriteLine($"{txtCity.Text}, {txtState.Text} {txtZipCode.Text}");
-                    }
-                    file.WriteLine();
-                    foreach (var sprocket in sprockets)
-                    {
-                        file.WriteLine(sprocket.ToString());
+                        file.WriteLine($"{txtName.Text}: {sprockets.Count} items, Total Price: ${totalPrice.ToString("N")}");
+                        if (!chkbxLocalPickup.IsChecked.Value)
+                        {
+                            address.ToString();
+                        }
                         file.WriteLine();
+                        foreach (var sprocket in sprockets)
+                        {
+                            file.WriteLine(sprocket.ToString());
+                            file.WriteLine();
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show($"Error in software: {ex}");
                 }
             }
         }
@@ -104,6 +122,14 @@ namespace CoxP5
             txtState.Visibility = Visibility.Visible;
             txtStreet.Visibility = Visibility.Visible;
             txtZipCode.Visibility = Visibility.Visible;
+        }
+        
+        private void UpdateAddress()
+        {
+            address.Street = txtStreet.Text;
+            address.City = txtCity.Text;
+            address.State = txtState.Text;
+            address.ZipCode = txtZipCode.Text;
         }
     }
 }
